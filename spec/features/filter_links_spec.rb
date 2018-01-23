@@ -12,8 +12,15 @@ feature 'User can filter links by tag' do
     fill_in 'tags', :with => 'news'
     click_button 'save'
 
+    visit('/links/new')
+    fill_in "url", :with => 'www.skynews.co.uk'
+    fill_in 'title', :with => 'SKYnews'
+    fill_in 'tags', :with => 'news'
+    click_button 'save'
+
     visit '/tags/news'
     expect(page).to have_content 'www.bbcnews.co.uk'
     expect(page).not_to have_content 'www.facebook.com'
+    expect(page).to have_content 'www.skynews.co.uk'
   end
 end
