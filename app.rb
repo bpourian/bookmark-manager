@@ -19,11 +19,15 @@ class BookMarkManager < Sinatra::Base
 
   post '/links' do
     link = Link.create(url:params[:url],title:params[:title])
-    p params
     tag = Tag.create(name:params[:tags])
-    p params
     link.tags << tag
     link.save
     redirect '/links'
   end
+
+  get '/tags/news' do
+    @links = Link.all
+    erb :'/tags/news_tags'
+  end
+
 end
