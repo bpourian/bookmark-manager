@@ -1,8 +1,9 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'sinatra/base'
-require './models/link.rb'
+require './models/database_setup'
 
 class BookMarkManager < Sinatra::Base
-
   get '/' do
     'Hello!'
   end
@@ -17,8 +18,12 @@ class BookMarkManager < Sinatra::Base
   end
 
   post '/links' do
-    Link.create(url:params[:url],title:params[:title])
+    link = Link.create(url:params[:url],title:params[:title])
+    p params
+    tag = Tag.create(name:params[:tags])
+    p params
+    link.tags << tag
+    link.save
     redirect '/links'
   end
-
 end
