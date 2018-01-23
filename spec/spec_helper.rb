@@ -6,10 +6,7 @@ require 'rspec'
 require './models/link'
 require 'database_cleaner'
 
-
 Capybara.app = BookMarkManager
-
-ENV['RACK_ENV'] = 'test'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
