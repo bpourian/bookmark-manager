@@ -1,4 +1,5 @@
 require 'data_mapper'
+require_relative './database_setup'
 
 class Link
   include DataMapper::Resource
@@ -7,8 +8,6 @@ class Link
   property :url, String
 end
 
-DataMapper::Logger.new($stdout, :debug)
-
-DataMapper.setup(:default, 'postgres://localhost/bookmark_manager_test')
+database_setup
 DataMapper.finalize
 DataMapper.auto_upgrade!

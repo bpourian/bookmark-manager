@@ -2,7 +2,6 @@ require 'sinatra/base'
 require './models/link.rb'
 
 class BookMarkManager < Sinatra::Base
-  enable :sessions
 
   get '/' do
     'Hello!'
