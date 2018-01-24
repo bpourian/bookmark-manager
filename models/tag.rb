@@ -7,11 +7,7 @@ class Tag
   has n, :links, through: Resource
 
   def self.multiple_tags(tag_names, link)
-    tag_names.split.each do |item|
-       link.tags << self.first_or_create(name: item)
-     end
-     link.save
+    tag_names.split.each {|item| link.tags << self.first_or_create(name: item)}
+    link.save
   end
-
-
 end

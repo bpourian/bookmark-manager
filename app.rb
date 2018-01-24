@@ -5,7 +5,7 @@ require './models/database_setup'
 
 class BookMarkManager < Sinatra::Base
   get '/' do
-    'Hello!'
+    redirect '/links'
   end
 
   get '/links' do
