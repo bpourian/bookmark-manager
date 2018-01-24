@@ -3,7 +3,7 @@ feature 'User can filter links by tag' do
     visit('/links/new')
     fill_in "url", :with => 'www.facebook.com'
     fill_in 'title', :with => 'Facebook'
-    fill_in 'tags', :with => 'Social'
+    fill_in 'tags', :with => 'social'
     click_button 'save'
 
     visit('/links/new')
@@ -23,4 +23,9 @@ feature 'User can filter links by tag' do
     expect(page).not_to have_content 'www.facebook.com'
     expect(page).to have_content 'www.skynews.co.uk'
   end
+end
+
+feature 'Viewing links' do
+
+
 end
