@@ -18,7 +18,7 @@ class BookMarkManager < Sinatra::Base
   end
 
   post '/links' do
-    link = Link.create(url:params[:url],title:params[:title])
+    link = Link.first_or_create(url:params[:url],title:params[:title])
     tag = Tag.first_or_create(name:params[:tags])
     link.tags << tag
     link.save

@@ -1,0 +1,7 @@
+<% @links.each do |link| %>
+  <% if link.tags.map(&:name).include?('news') %>
+    Title: <%= link.title %>
+    URL:   <%= link.url   %>
+    Tags:  <%= link.tags.map(&:name).join(",") %>
+    <% end %>
+<% end %>
