@@ -4,17 +4,23 @@ require 'sinatra/base'
 require './models/database_setup'
 
 class BookMarkManager < Sinatra::Base
+  enable :sessions
+
   get '/' do
     redirect '/links'
   end
 
   get '/links' do
     @links = Link.all
+    @user = session[:user]
+    p User.all
+    p User.first
+    p @user
     erb :'links/index'
   end
 
   post '/links' do
-    link = Link.first_or_create(url:params[:url],title:params[:title])
+    link = Link.first_or_create(url: params[:url],title:params[:title])
     Tag.multiple_tags(params[:tags], link)
     redirect '/links'
   end
@@ -30,9 +36,8 @@ class BookMarkManager < Sinatra::Base
   end
 
   post '/signup' do
-    p params
-    params[:email]
-    params[:password]
+    User.first_or_create(email: params[:email], password: params[:password])
+    session[:user] = User.first(email: params[:email])
     redirect '/links'
   end
 
