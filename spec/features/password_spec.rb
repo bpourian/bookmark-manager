@@ -3,6 +3,7 @@ feature 'password encryption' do
     visit '/signup'
     fill_in('email', :with => 'b.pourian@hotmail.co.uk')
     fill_in('password', :with => 'password1')
+    p "hello, this is still going"
     click_button 'submit'
     user = User.first(email: 'b.pourian@hotmail.co.uk')
 
