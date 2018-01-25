@@ -11,7 +11,6 @@ feature 'Signup and submit' do
   end
 
   scenario 'Expect user count to have increased by one' do
-    skip
-    expect(page).to have_content('users: 1')
+    expect(User.count).to eq 1
   end
 end
