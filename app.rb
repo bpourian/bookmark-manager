@@ -5,6 +5,7 @@ require './models/database_setup'
 
 class BookMarkManager < Sinatra::Base
   enable :sessions
+  set :session_secret, 'super secret'
 
   get '/' do
     redirect '/links'
@@ -33,10 +34,11 @@ class BookMarkManager < Sinatra::Base
   end
 
   post '/user/new' do
+    user = User.creat(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     @user = User.new(email: params[:email])
     @user.password = params[:password]
     @user.save!
-        p "I am still running"
     session[:user] = User.first(email: params[:email])
     redirect '/links'
   end
@@ -46,7 +48,7 @@ class BookMarkManager < Sinatra::Base
   end
 
   def current_user
-    session[:user]
+    @current_user ||= User.get(session[:user_id])
   end
 
 end
