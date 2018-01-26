@@ -6,7 +6,9 @@
   </head>
   <body>
     <% if current_user %>
-      Welcome, <%= current_user.email %>
+      Welcome <%= current_user.email %>
+      <% else %>
+        Welcome to Bookmark Manager
       <% end %>
       <%= yield %> <!-- this then yields to the view which has been called by your controller -->
   </body>
