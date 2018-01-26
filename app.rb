@@ -13,7 +13,6 @@ class BookMarkManager < Sinatra::Base
 
   get '/links' do
     @links = Link.all
-    @user = current_user
     erb :'links/index'
   end
 
@@ -34,12 +33,8 @@ class BookMarkManager < Sinatra::Base
   end
 
   post '/user/new' do
-    user = User.creat(email: params[:email], password: params[:password])
+    user = User.create(email: params[:email], password: params[:password])
     session[:user_id] = user.id
-    @user = User.new(email: params[:email])
-    @user.password = params[:password]
-    @user.save!
-    session[:user] = User.first(email: params[:email])
     redirect '/links'
   end
 
@@ -47,8 +42,10 @@ class BookMarkManager < Sinatra::Base
     erb :'register/signup'
   end
 
+helpers do
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
+end
 
 end

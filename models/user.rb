@@ -8,22 +8,9 @@ class User
   property :email, String, :length => 100
   property :password_hash, Text
 
-
-  # def password
-  #   @password ||=Password.new(password_hash)
-  # end
-  #
-  # def password=(new_password)
-  #   @password = Password.create(new_password)
-  #   self.password_hash = @password
-  # end
-
   def password=(password)
     self.password_hash = BCrypt::Password.create(password)
   end
-
-
-
 end
 
 
